@@ -1,0 +1,188 @@
+# Logging parameters
+logging:
+  # Name which which the run will be logged
+  run_name: "02_breakout"
+
+  # Directory where main results are saved
+  output_root: "results"
+  # Checkpoint directory
+  save_root: "checkpoints"
+
+# Dataset parameters
+data:
+  # Dataset path
+  data_root: "data/breakout_v2_160_ours"
+  # Crop to apply to each frame [left_index, upper_index, right_index, lower_index]
+  crop: [0, 0, 160, 208]
+  # Number of distinct actions present in the dataset
+  actions_count: 3
+  # True if ground truth annotations are available
+  ground_truth_available: True
+
+# Model parameters
+model:
+  # Class to use as model
+  architecture: "model.reduced_model.model"
+
+  representation_network:
+    # desired (width, height) of the input images
+    target_input_size: [160, 208]
+    # features of the tensor output by the representation network
+    state_features: 64
+    # height and width output by the representation network
+    state_resolution: [26, 20]
+
+  # Dynamics network parameters
+  dynamics_network:
+    # Size of the hidden state
+    hidden_state_size: 64
+    # Output units in the MLP for input vector embedding
+    embedding_mlp_size: 64
+    # Elements in the noise vector
+    random_noise_size: 32
+
+  rendering_network:
+    # Shape of the input tensor [features, height, width]
+    input_shape: [64, 26, 20]
+
+  # Action recognition network parameters
+  action_network:
+    use_gumbel: True
+    hard_gumbel: False
+    ensamble_size: 1
+    # Temperature to use in Gumbel-Softmax for action sampling
+    gumbel_temperature: 1.0
+    # Number of the spatial dimensions of the embedding space
+    action_space_dimension: 1
+
+  # Centroid estimator parameters
+  centroid_estimator:
+    # Alpha value to use for computing the moving average
+    alpha: 0.1
+
+# Training parameters
+training:
+
+  trainer: "training.smooth_mi_trainer"
+
+  use_ground_truth_actions: False
+
+  learning_rate: 0.0004
+  weight_decay: 0.000001
+
+  # Number of steps to use for pretraining
+  pretraining_steps: 3000
+  # Whether to avoid backpropagation of gradients into the representation network during pretraining
+  pretraining_detach: False
+  # Steps at which to switch learning rate
+  lr_schedule: [300000, 10000000000]
+  # Gamma parameter for lr scheduling
+  lr_gamma: 0.3333
+  # Maximum number of steps for which to train the model
+  max_steps: 300000
+  # Interval in training steps at which to save the model
+  save_freq: 3000
+
+  # Number of ground truth observations in each sequence to use at the beginning of training
+  ground_truth_observations_start: 6
+  # Number of real observations in each sequence to use at the end of the annealing period
+  ground_truth_observations_end: 6
+  # Length in steps of the annealing period
+  ground_truth_observations_steps: 16000
+
+  # Number of ground truth observations in each sequence to use at the beginning of training
+  gumbel_temperature_start: 1.0
+  # Number of real observations in each sequence to use at the end of the annealing period
+  gumbel_temperature_end: 0.4
+  # Length in steps of the annealing period
+  gumbel_temperature_steps: 20000
+
+  # The alpha value to use for mutual information estimation smoothing
+  mutual_information_estimation_alpha: 0.2
+
+  # Parameters for batch building
+  batching:
+    batch_size: 8
+
+    # Number of observations that each batch sample possesses
+    observations_count: 9
+    # Number of observations that the first batch possesses
+    observations_count_start: 7
+    # Length in steps of the annealing period
+    observations_count_steps: 15000
+
+    # Number of frames to skip between each observation
+    skip_frames: 0
+    # Total number of frames that compose an observation
+    observation_stacking: 1
+    # Number of threads to use for dataloading
+    num_workers: 8
+
+  # Weights to use for the loss
+  loss_weights:
+    # Weight for the reconstruction loss
+    reconstruction_loss_lambda: 1.0
+    # Weight for the reconstruction loss during pretraining
+    reconstruction_loss_lambda_pretraining: 1.0
+    # Weight for the perceptual loss
+    perceptual_loss_lambda: 1.0
+    # Weight for the perceptual loss during pretraining
+    perceptual_loss_lambda_pretraining: 1.0
+    # Weight for the action divergence between plain and transformed sequences
+    action_divergence_lambda: 0.0
+    # Weight for the action divergence between plain and transformed sequences during pretraining
+    action_divergence_lambda_pretraining: 0.0
+    # Weight for state reconstruction loss
+    states_rec_lambda: 0.2
+    # Weight for state reconstruction loss during pretraining
+    states_rec_lambda_pretraining: 0.2
+    # Weight for state reconstruction loss during pretraining
+    hidden_states_rec_lambda_pretraining: 1.0
+    # Weights for the action distribution entropy loss
+    entropy_lambda: 0.0
+    # Weights for the action distribution entropy loss during pretraining
+    entropy_lambda_pretraining: 0.0
+    # Weights for the action directions kl divergence loss
+    action_directions_kl_lambda: 0.0001
+    # Weights for the action directions kl divergence loss during pretraining
+    action_directions_kl_lambda_pretraining: 0.0001
+    # Weights for the action mutual information loss
+    action_mutual_information_lambda: 0.15
+    # Weights for the action mutual information loss during pretraining
+    action_mutual_information_lambda_pretraining: 0.15
+    # Weights for the kl distance loss between action states and reconstructed action states
+    action_state_distribution_kl_lambda: 0.0
+    # Weights for the kl distance loss between action states and reconstructed action states during pretraining
+    action_state_distribution_kl_lambda_pretraining: 0.0
+
+  # Number of steps between each plotting of the action space
+  action_direction_plotting_freq: 1000
+
+# Parameters for evaluation
+evaluation:
+
+  evaluator: "evaluation.evaluator"
+
+  max_evaluation_batches: 20
+  # Minimum number of steps between two successive evaluations
+  eval_freq: 8000
+  # Parameters for batch building
+  batching:
+    batch_size: 16
+    # Number of observations that each batch sample possesses
+    observations_count: 32
+    # Number of frames to skip between each observation
+    skip_frames: 0
+    # Total number of frames that compose an observation
+    observation_stacking: 1
+    # Number of threads to use for dataloading
+    num_workers: 8
+
+# Parameters for final evaluation dataset computation
+evaluation_dataset:
+
+  # The number of ground truth context frames to use to produce each sequence
+  ground_truth_observations_init: 4
+  builder: "evaluation.evaluation_dataset_builder"
+
+

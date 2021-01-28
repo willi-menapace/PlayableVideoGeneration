@@ -1,0 +1,49 @@
+# Logging parameters
+logging:
+  # Name which which the run will be logged
+  run_name: "03_tennis"
+  # Comments on the run
+  comments: ""
+
+  # Directory where main results are saved
+  output_root: "evaluation_results"
+
+# Common parameters for both datasets
+data:
+  # Size at which to perform the evaluation
+  target_input_size: [256, 96]
+  # Number of distinct actions present in the dataset
+  actions_count: 7
+  # True if ground truth annotations are available
+  ground_truth_available: False
+
+# Reference dataset parameters
+reference_data:
+  # Dataset path
+  data_root: "data/tennis_v4_256_ours/test"
+  # Crop to apply to each frame [left_index, upper_index, right_index, lower_index]
+  crop: [0, 0, 256, 96]
+
+# Reference dataset parameters
+generated_data:
+  # Dataset path
+  data_root: "results/03_tennis/evaluation_dataset"
+  # Crop to apply to each frame [left_index, upper_index, right_index, lower_index]
+  crop: [0, 0, 256, 96]
+
+# Parameters for evaluation
+evaluation:
+
+  evaluator: "evaluation.dataset_evaluator"
+
+  # Parameters for batch building
+  batching:
+    batch_size: 6
+    # Number of observations that each batch sample possesses
+    observations_count: 16
+    # Number of frames to skip between each observation
+    skip_frames: 0
+    # Total number of frames that compose an observation
+    observation_stacking: 1
+    # Number of threads to use for dataloading
+    num_workers: 0

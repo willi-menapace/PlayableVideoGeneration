@@ -1,0 +1,49 @@
+# Logging parameters
+logging:
+  # Name which which the run will be logged
+  run_name: "01_bair"
+  # Comments on the run
+  comments: ""
+
+  # Directory where main results are saved
+  output_root: "evaluation_results"
+
+# Common parameters for both datasets
+data:
+  # Size at which to perform the evaluation
+  target_input_size: [256, 256]
+  # Number of distinct actions present in the dataset
+  actions_count: 7
+  # True if ground truth annotations are available
+  ground_truth_available: False
+
+# Reference dataset parameters
+reference_data:
+  # Dataset path
+  data_root: "data/bair_256_ours/test"
+  # Crop to apply to each frame [left_index, upper_index, right_index, lower_index]
+  crop: [0, 0, 256, 256]
+
+# Reference dataset parameters
+generated_data:
+  # Dataset path
+  data_root: "results/01_bair/evaluation_dataset"
+  # Crop to apply to each frame [left_index, upper_index, right_index, lower_index]
+  crop: [0, 0, 256, 256]
+
+# Parameters for evaluation
+evaluation:
+
+  evaluator: "evaluation.dataset_evaluator_bair"
+
+  # Parameters for batch building
+  batching:
+    batch_size: 1
+    # Number of observations that each batch sample possesses
+    observations_count: 30
+    # Number of frames to skip between each observation
+    skip_frames: 0
+    # Total number of frames that compose an observation
+    observation_stacking: 1
+    # Number of threads to use for dataloading
+    num_workers: 0

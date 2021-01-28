@@ -52,9 +52,9 @@ Please create the following directories in the root of the project:
 Datasets can be downloaded at the following link:
 [Google Drive](https://drive.google.com/drive/folders/1CuHK_-cFWih0F8AxB4b76FoBQ9RjWMww?usp=sharing)
 
-- Breakout: breakout_v2_160_ours.tar.gz
+- Breakout: Coming soon
 - BAIR: bair_256_ours.tar.gz
-- Tennis: tennis_v4_256_ours.tar.gz
+- Tennis: Coming soon
 
 Please extract them under the `data` folder
 

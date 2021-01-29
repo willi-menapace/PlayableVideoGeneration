@@ -2,9 +2,6 @@
 # Playable Video Generation
 <br>
 <p align="center">
-    <img src="./resources/architecture.png"/> <br />
-    <em>
-    Figure 1. Illustration of the proposed CADDY model for playable video generation.
     </em>
     <img src="./resources/interactive_sequences.gif"/> <br />
 </p>
@@ -12,10 +9,7 @@
 
 > **Playable Video Generation**<br>
 > [Willi Menapace](https://www.willimenapace.com/), [Stéphane Lathuilière](https://stelat.eu/), [Sergey Tulyakov](http://www.stulyakov.com/), [Aliaksandr Siarohin](https://github.com/AliaksandrSiarohin), [Elisa Ricci](http://elisaricci.eu/)<br>
-> ArXiv<br>
-> Paper: [arXiv: Coming soon]()<br>
-> [Website](https://willi-menapace.github.io/playable-video-generation-website/)<br>
-> [Live Demo](https://willi-menapace.github.io/playable-video-generation-website/play.html)<br>
+
 > Paper: [ArXiv](https://arxiv.org/abs/2101.12195)<br>
 > Supplementary: [Website](https://willi-menapace.github.io/playable-video-generation-website/)<br>
 > Demo: [Try it Live](https://willi-menapace.github.io/playable-video-generation-website/play.html)<br>

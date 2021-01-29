@@ -6,20 +6,31 @@
     <em>
     Figure 1. Illustration of the proposed CADDY model for playable video generation.
     </em>
+    <img src="./resources/interactive_sequences.gif"/> <br />
 </p>
 <br>
 
 > **Playable Video Generation**<br>
 > [Willi Menapace](https://www.willimenapace.com/), [Stéphane Lathuilière](https://stelat.eu/), [Sergey Tulyakov](http://www.stulyakov.com/), [Aliaksandr Siarohin](https://github.com/AliaksandrSiarohin), [Elisa Ricci](http://elisaricci.eu/)<br>
 > ArXiv<br>
-
 > Paper: [arXiv: Coming soon]()<br>
 > [Website](https://willi-menapace.github.io/playable-video-generation-website/)<br>
 > [Live Demo](https://willi-menapace.github.io/playable-video-generation-website/play.html)<br>
-
+> Paper: [ArXiv](https://arxiv.org/abs/2101.12195)<br>
+> Supplementary: [Website](https://willi-menapace.github.io/playable-video-generation-website/)<br>
+> Demo: [Try it Live](https://willi-menapace.github.io/playable-video-generation-website/play.html)<br>
 > **Abstract:** *This paper introduces the unsupervised learning problem of playable video generation (PVG). In PVG, we aim at allowing a user to control the generated video by selecting a discrete action at every time step as when playing a video game. The difficulty of the task lies both in learning semantically consistent actions and in generating realistic videos conditioned on the user input. We propose a novel framework for PVG that is trained in a self-supervised manner on a large dataset of unlabelled videos. We employ an encoder-decoder architecture where the predicted action labels act as bottleneck. The network is constrained to learn a rich action space using, as main driving loss, a reconstruction loss on the generated video. We demonstrate the effectiveness of the proposed approach on several datasets with wide environment variety.*
 
 # Overview
+
+<br>
+<p align="center">
+    <img src="./resources/architecture.png"/> <br />
+    <em>
+    Figure 1. Illustration of the proposed CADDY model for playable video generation.
+    </em>
+</p>
+<br>
 
 Given a set of completely unlabeled videos, we jointly learn a set of discrete actions and a video generation model conditioned on the learned actions. At test time, the user can control the generated video on-the-fly providing action labels as if he or she was playing a videogame. We name our method CADDY. Our architecture for unsupervised playable video generation is composed by several components. An encoder E extracts frame representations from the input sequence. A temporal model estimates the successive states using a recurrent dynamics network R and an action network A which predicts the action label corresponding to the current action performed in the input sequence. Finally, a decoder D reconstructs the input frames. The model is trained using reconstruction as the main driving loss.
 
@@ -116,7 +127,7 @@ Training the model in full resolution on our datasets required the following GPU
 
 Lower resolution versions of the model can be trained with a single 8GB GPU.
 
-# Evaluation  
+# Evaluation
 
 Evaluation requires two steps. First, an evaluation dataset must be built. Second, evaluation is carried out on the evaluation dataset. To build the evaluation dataset please issue:
 

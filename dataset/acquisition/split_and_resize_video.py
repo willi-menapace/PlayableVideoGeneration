@@ -13,7 +13,7 @@ from PIL import Image
 # ffmpeg -ss 00:00:00 -t 00:10:00 -i tennis_djokovic_federed_wimbledon.mp4 -acodec copy -vcodec copy 00001.mp4
 
 # Directory in which to search files
-root_directory = "/windows/Users/Willi/Desktop/tennis_data_2"
+root_directory = "tmp"
 video_extension = "mp4"
 
 # Length in seconds of each split
@@ -38,6 +38,7 @@ def get_video_duration(filename: str) -> float:
     duration = float(output)
     return duration
 
+
 def create_segment(params):
 
     filename, split_idx = params
@@ -58,9 +59,6 @@ def create_segment(params):
 
     subprocess.run(command_parameters)
 
-    print(f"- Creating reduced segment {split_idx} in '{filename}'")
-    subprocess.run(["ffmpeg", "-i", current_output_split, '-s', f'{reduced_splits_resolution[0]}x{reduced_splits_resolution[1]}',
-                    '-r', f'{reduced_splits_framerate}', current_output_reduced_split])
 
 def split_video(filename: str, pool: mp.Pool):
     '''

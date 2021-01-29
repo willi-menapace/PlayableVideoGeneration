@@ -14,9 +14,9 @@ from dataset.video import Video
 
 video_extension = "mp4"
 frames_extension = "png"
-root_directory = "/windows/Users/Willi/Desktop/tennis_data/all_sequences"
-output_directory = "/windows/Users/Willi/Desktop/tennis_data/tennis_v3"
-annotations_filename = "annotations.csv"
+root_directory = "tmp"
+output_directory = "tmp/tennis_ours"
+annotations_filename = "dataset/acquisition/tennis_annotations/annotations.csv"
 frameskip = 0
 #frameskip = 4
 processes = 8
@@ -86,6 +86,7 @@ def acquire_sequence(video_capture: cv2.VideoCapture, capture_index: int, sequen
 
     return capture_index
 
+
 def acquire_video(args):
     annotations, begin_idx = args
     annotations = annotations.sort_values("begin_frame")
@@ -110,11 +111,11 @@ def acquire_video(args):
         output_path = os.path.join(output_directory, f"{sequence_idx + begin_idx:05d}")
         capture_index = acquire_sequence(video_capture, capture_index, sequence_data, output_path)
 
+
 if __name__ == "__main__":
 
     # Reads the video annotations
-    annotations_path = os.path.join(root_directory, annotations_filename)
-    annotations = pd.read_csv(annotations_path)
+    annotations = pd.read_csv(annotations_filename)
 
     # Creates the output directory
     Path(output_directory).mkdir(parents=True, exist_ok=True)

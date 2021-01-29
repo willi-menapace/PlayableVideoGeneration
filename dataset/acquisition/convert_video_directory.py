@@ -1,5 +1,5 @@
 #ffmpeg -i 000000.mp4 -filter:v fps=10  %05d.png
-
+import argparse
 import subprocess
 import glob
 import os
@@ -70,23 +70,33 @@ def acquire_video(video_path, output_path, tmp_path, fps, extension, target_size
     shutil.rmtree(tmp_path)
 
 
-
-video_extension = "mp4"
-output_extension = "png"
-root_directory = "data/bair_alex"
-output_directory = "data/bair_v1"
-acquisition_fps = 10
-
-target_size = [80, 80]
-
-processes = 8
-
 if __name__ == "__main__":
 
     print("== Video Search ==")
 
+    # Loads arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--video_directory", type=str, required=True)
+    parser.add_argument("--output_directory", type=str, required=True)
+    parser.add_argument("--target_size", type=int, nargs=2, required=True)
+    parser.add_argument("--fps", type=int, default=10)
+    parser.add_argument("--processes", type=int, default=8)
+    parser.add_argument("--video_extension", type=str, default="mp4")
+    parser.add_argument("--output_extension", type=str, default="png")
+
+    arguments = parser.parse_args()
+
+    video_extension = arguments.video_extension
+    output_extension = arguments.output_extension
+    root_directory = arguments.video_directory
+    output_directory = arguments.output_directory
+    acquisition_fps = arguments.fps
+    target_size = arguments.target_size
+    processes = arguments.processes
+
     # Searches the top level directories
     directories_to_process = [current_file for current_file in glob.glob(os.path.join(root_directory, "*")) if os.path.isdir(current_file)]
+    directories_to_process.append(root_directory)
     directories_to_process.sort()
 
     # Extracts the paths of all videos in the directories to process

@@ -8,9 +8,9 @@ import multiprocessing as mp
 from pathlib import Path
 from distutils.dir_util import copy_tree
 
-annotations_directory = "/windows/Users/Willi/Desktop/tennis_data/djokovic_federer_wimbledon_splits"
-root_directory = "/windows/Users/Willi/Desktop/tennis_data/tennis_v3"
-output_directory = "/home/willi/dl/animation/video-generation/data/tennis_v4"
+annotations_directory = "dataset/acquisition/tennis_annotations"
+root_directory = "tmp/tennis_ours"
+output_directory = "tmp/tennis_v4_256_ours"
 splits_filename = "splits.csv"
 
 

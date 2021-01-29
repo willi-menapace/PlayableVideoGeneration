@@ -13,6 +13,7 @@
 > Paper: [ArXiv](https://arxiv.org/abs/2101.12195)<br>
 > Supplementary: [Website](https://willi-menapace.github.io/playable-video-generation-website/)<br>
 > Demo: [Try it Live](https://willi-menapace.github.io/playable-video-generation-website/play.html)<br>
+
 > **Abstract:** *This paper introduces the unsupervised learning problem of playable video generation (PVG). In PVG, we aim at allowing a user to control the generated video by selecting a discrete action at every time step as when playing a video game. The difficulty of the task lies both in learning semantically consistent actions and in generating realistic videos conditioned on the user input. We propose a novel framework for PVG that is trained in a self-supervised manner on a large dataset of unlabelled videos. We employ an encoder-decoder architecture where the predicted action labels act as bottleneck. The network is constrained to learn a rich action space using, as main driving loss, a reconstruction loss on the generated video. We demonstrate the effectiveness of the proposed approach on several datasets with wide environment variety.*
 
 # Overview
@@ -43,9 +44,11 @@ The environment can be installed and activated with:
 ## Docker
 
 Use the Dockerfile to build the docker image:
+
 `docker build -t video-generation:1.0 .`
 
 Run the docker image mounting the root directory to `/video-generation` in the docker container:
+
 `docker run -it --gpus all --ipc=host -v /path/to/directory/video-generation:/video-generation video-generation:1.0 /bin/bash`
 
 # Preparing Datasets

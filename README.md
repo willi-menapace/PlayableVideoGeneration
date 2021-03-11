@@ -9,6 +9,7 @@
 
 > **Playable Video Generation**<br>
 > [Willi Menapace](https://www.willimenapace.com/), [Stéphane Lathuilière](https://stelat.eu/), [Sergey Tulyakov](http://www.stulyakov.com/), [Aliaksandr Siarohin](https://github.com/AliaksandrSiarohin), [Elisa Ricci](http://elisaricci.eu/)<br>
+> **CVPR 2021 (Oral)**
 
 > Paper: [ArXiv](https://arxiv.org/abs/2101.12195)<br>
 > Supplementary: [Website](https://willi-menapace.github.io/playable-video-generation-website/)<br>

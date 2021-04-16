@@ -55,11 +55,14 @@ Run the docker image mounting the root directory to `/video-generation` in the d
 # Preparing Datasets
 
 ## BAIR
-Coming soon
+
+Download the `bair_256_ours.tar.gz` archive from [Google Drive](https://drive.google.com/drive/folders/1CuHK_-cFWih0F8AxB4b76FoBQ9RjWMww?usp=sharing)  and extract it under the `data` folder.
+
+We thank [Frederik Ebert](https://febert.github.io/) and the Berkeley Artificial Intelligence Research Lab for providing us with the high resolution version of their [BAIR robot-pushing dataset](https://sites.google.com/berkeley.edu/robotic-interaction-datasets).
 
 ## Atari Breakout
 
-Download the `breakout_160_ours.tar.gz` archive from [Google Drive](https://drive.google.com/drive/folders/1CuHK_-cFWih0F8AxB4b76FoBQ9RjWMww?usp=sharing)  and extract it under the `data` folder.
+Download the `breakout_v2_160_ours.tar.gz` archive from [Google Drive](https://drive.google.com/drive/folders/1CuHK_-cFWih0F8AxB4b76FoBQ9RjWMww?usp=sharing)  and extract it under the `data` folder.
 
 ## Tennis
 

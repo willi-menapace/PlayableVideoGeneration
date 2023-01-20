@@ -25,7 +25,7 @@ class SSIM(nn.Module):
         observations_count = reference_observations.size(1)
         flattened_reference_observations = TensorFolder.flatten(reference_observations)
         flattened_generated_observations = TensorFolder.flatten(generated_observations)
-        flattened_ssim = ssim(flattened_generated_observations, flattened_reference_observations, range, reduction="none")
+        flattened_ssim = ssim(flattened_generated_observations, flattened_reference_observations, data_range=range, reduction="none")
         folded_ssim = TensorFolder.fold(flattened_ssim, observations_count)
 
         return folded_ssim
